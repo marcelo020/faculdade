@@ -1,0 +1,483 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+/* ----------------- TELA INICIAL -------------- */
+  #start-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #bddde6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#player-name-input {
+  font-size: 20px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+/*------------------- NOME DO PERSONAGEM -----------------*/
+.name-tag { 
+  position: absolute;
+  top: -150px;
+  width: 100px;
+  text-align: center;
+  color: rgb(2, 2, 2);
+  font-weight: bold;
+  font-size: 50px;
+  border-radius: 10px;
+}
+/*----------------------- ATE AQUI ----------------------- */
+
+  p, h1, h2, h3, h4 {
+    display: inline-block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+  }
+
+/*--------------------- PAREDE VISIVEL --------------------*/
+.wall {
+  position: absolute;
+  background: #44444400;
+  border: 2px solid #22222200;
+  border-radius: 6px;
+}
+  
+  body {
+    background-color: #9edae9;
+    font-family: Arial, Helvetica, sans-serif;
+    overscroll-behavior: contain;
+  }
+  
+  .wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .bunny-radar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+  
+  .circle {
+    position: relative;
+    border-radius: 50%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bunny-pos::after {
+    position: absolute;
+    content: '';
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAADhJREFUKFNjtFlz4j8DEYARpIYYxWCFxCiGKySkGEUhPsUYCnEpxqoQm2KcCtEV41WIrJigQphiAH0JGuGElBe4AAAAAElFTkSuQmCC);
+    width: 14px;
+    height: 14px;
+    background-size: 14px;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    bottom: -18px;
+    transform: rotate(135deg);
+  }
+
+  /*-------------- AJUSTA O TAMANHO DO PLAYER -------------*/
+  .player.sprite-container {
+  transform: scale(0.4); 
+}
+
+button:focus {
+  outline: 2px solid #28fc5d;
+}
+
+  .bunny-indicator {
+    position: absolute;
+    bottom: 0;
+    color: #3cacc8;
+    font-size: 0.8rem;
+  }
+  
+  .end-message {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 99999;
+    animation: fade-in forwards 1s;
+    pointer-events: all;
+  }
+  
+  .end-message p {
+    color: #57280f;
+    background-color: #ffffff8b;
+    width: 240px;
+    padding: 30px;
+    text-align: center;
+    transform: translateY(calc(-100% - 10px));
+  }
+  
+  button {
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: #4d220a;
+    background-color: #c3ac83;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #28fc5d;
+  }
+  
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .d-none {
+    display: none;
+  }
+  
+  .bunny {
+    pointer-events: none;
+  }
+  
+  .bunny::after {
+    background-image: url(img/teste.png);
+  }
+  
+  .sad .bunny::after {
+    background-image: url(img/teste2.png);
+  }
+  
+  .happy-right .bunny::after,
+  .happy-left .bunny::after {
+    background-position: 0;
+    background-size: calc(var(--w) * var(--m)) calc(var(--h) * var(--m));
+  }
+  
+  .happy-right::before,
+  .happy-left::before{
+    position: absolute;
+    top: -50px;
+    left: calc(var(--m) * -0.5 * var(--h));
+    width: calc(var(--m) * var(--h));
+    content: attr(message);
+    font-size: 0.8em;
+    text-align: center;
+    color: #57280f;
+    animation: display forwards 0.8s;
+  }
+  
+  @keyframes display {
+    0% {
+      transform: translateY(0);
+    }
+    90% {
+      transform: translateY(-30px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+  }
+  
+  .happy-right .bunny::after {
+    background-image: url(img/guerreiro.png);
+  }
+  
+  .happy-left .bunny::after {
+    background-image: url(img/guerreiro.png);
+  }
+  
+  .hug-bunny-bear .bunny,
+  .hug-bear-bunny .bunny {
+    --w: 60px; /*aumenta ou diminui o tamanho na hora do beijo */
+    top: -42px;
+  }
+  
+  .hug-bunny-bear .bunny::after,
+  .hug-bear-bunny .bunny::after {
+    background-position: 0;
+    background-size: calc(var(--w) * var(--m));
+    image-rendering: pixelated;
+  }
+  
+ 
+  
+  @keyframes hug-bear-bunny {
+    0%, 4%, 95%, 100% {
+      background-image: url(img/teste2.png);
+    }
+    5%, 9%, 90%, 94% {
+      background-image: url(img/teste2.png);
+    }
+    10%, 89% {
+      background-image: url(img/teste2.png);
+    }
+  }
+  
+  .hug-bunny-bear .bunny::after {
+    background-image: url(img/guerreiro.png);
+    animation: hug-bunny-bear forwards 1.8s;
+  }
+  
+  @keyframes hug-bunny-bear {
+    0%, 4%, 95%, 100% {
+      background-image: url(img/teste2.png);
+    }
+    5%, 9%, 90%, 94% {
+      background-image: url(img/teste2.png);
+    }
+    10%, 89% {
+      background-image: url(img/teste2.png);
+    }
+  }
+  
+  /* hp bar 
+  .hug-bear-bunny::after,
+  .hug-bunny-bear::after {
+    position: absolute;
+    top: -55px;
+    left: calc(-1 * var(--h));
+    content: '';
+    background-image: url();
+    width: calc(var(--h) * var(--m));
+    height: calc(6px * var(--m));
+    background-size: calc(var(--h) * var(--m)) calc(6px * var(--m));
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    /*barra do beijo
+  }
+  .hug-bear-bunny::before,
+  .hug-bunny-bear::before {
+    position: absolute;
+    top: -55px;
+    left: -24px;
+    content: '';
+    width: calc(24px * var(--m));
+    height: calc(3px * var(--m));
+    animation: top-up forwards 1.4s;
+  }
+    barra do beijo*/
+  
+  @keyframes top-up {
+    0% {
+      width: 0;
+      background-color: #8a8a8a;
+    }
+    100% {
+      width: calc(24px * var(--m));
+      background-color: #36e9ce;
+    }
+  }
+  
+  .bear::after {
+  
+  background-image: url(img/bixin2.png);
+}
+  
+  
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /*-----------aumenta o tamanho de todos os bonecos-------*/
+  .sprite-container {
+    position: absolute;
+    --w: 20px;
+    --h: 32px;
+    --m: 2;
+    width: 0;
+    height: 0;
+    z-index: 0;
+  }
+  
+  .sprite-container:has(.bunny) {
+    transition: 1s;
+  }
+  
+  .sprite  {
+    position: absolute;
+    --x: 3; /* grid */
+    --y: 4;
+    top: calc(-1 * var(--w));
+    left: calc(-1 * var(--w));
+    --width: calc(var(--w) * var(--m));
+    --height: calc(var(--h) * var(--m));
+    width: var(--width);
+    height: var(--width);
+  }
+  
+  .sprite::after {
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: var(--width);
+    height: var(--height);
+    background-size: calc(var(--width) * var(--x)) calc(var(--height) * var(--y));
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    background-position: var(--bx) var(--by);
+  }
+  
+  .map-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat;
+    image-rendering: pixelated;
+    background-repeat: no-repeat;
+
+  }
+  
+  .map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.4s;
+    background-image: url(img/escola.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+  }
+    
+    .map.slow-transition {
+    transition: 1.8s;
+  }
+  
+  .map.transition {
+    transition: 0s;
+  }
+  /*posição do boneco*/
+  .player-wrapper { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .tree {
+    position: absolute;
+    top: 900px;
+    left: 900px
+
+  }   
+  
+  .tree > div {
+    position: absolute;
+    --w: 100px;
+    --h: 100px;
+    --m: 3;
+    --width: calc(var(--w) * var(--m));
+    --height: calc(var(--h) * var(--m));
+    width: var(--width);
+    height: var(--width);
+    left: calc((var(--m) / -2) * var(--w));
+    top: calc((var(--m) / -2) * var(--w));
+  }
+  
+  .tree > div::after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    /* 
+    background-image: url(img/arvore\ sf.png);
+     */
+    image-rendering: pixelated;
+    background-repeat: no-repeat;
+    width: var(--width);
+    height: var(--height);
+    background-size: var(--width) var(--height); 
+  }
+  
+  
+  
+  .sign {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #57280f;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+    text-transform: none;
+  }
+  
+  .indicator {
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    color: #57280f;
+    font-size: 16px;
+    opacity: 0.8;
+    z-index: 999;
+    pointer-events: none;
+    height: 32px;
+    width: 36px;
+    line-height: 40px;
+  }
+  
+  .indicator::before {
+    position: absolute;
+    content: '';
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAYAAAAbBi9cAAAAAXNSR0IArs4c6QAAALRJREFUOE+llNsNgCAMRWUCHUMn0hF1Ih1DJ8CU2OZSofXBD5KWw6EIobna2LeRv6lftiPg2IunZEqa1x3nNdPQCcyL08QqiIIMK4EwLiC2YiW201ZWXOoQY8xqJLUbuqStt24alZKzwqkBGotRrQ6vQF8gvABbhT8QhN1AtIJXK51D4wz0BIIW+Ju4WyM4NcvyZqRPCA0t2wSq3TXr2DEmp4a33ytyyZhfieyp0HfOstLPzAmHG47SmZBqWwAAAABJRU5ErkJggg==);
+    width: 36px;
+    height: 32px;
+    background-size: 100%;
+    image-rendering: pixelated;
+    left: -42px;
+  }
+  
+  .indicator.happy::before {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAKNJREFUOE/lVMERgCAMsxPIGDqRjqgT6Rg6Qb1worVg68PzIz9oCGnSgyq1uqZmHI3zSrqG/V39AgZomJZ4v29DRmbVDyIJSkokmVf/K1FMqQ3RsnEPQSYpPTQ9KsX/DVEpWk+NHhHSJOg7DeUdmcZgfyFKAIushMmInrajcS6RVOapzDwqvYYzy7eoKH0NnsGW8fhy3h9IvMjMDJlPFjogOoVseByz1PgRF28AAAAASUVORK5CYII=);
+    height: 36px;
+    top: -4px;
+  }
+  
+  a {
+    color: #57280f;
+    text-decoration: none;
+    text-transform: none;
+  }
+  
+  a:hover { text-decoration: underline; }
